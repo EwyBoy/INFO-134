@@ -1,13 +1,14 @@
 // Sources: https://stackoverflow.com/questions/12460378/how-to-get-json-from-url-in-javascript
 
-const befolkningURL = 'http://wildboy.uib.no/~tpe056/folk/104857.json';
+const befolkningURL  = 'http://wildboy.uib.no/~tpe056/folk/104857.json';
 const sysselsatteURL = 'http://wildboy.uib.no/~tpe056/folk/100145.json';
-const utdanningURL = 'http://wildboy.uib.no/~tpe056/folk/104857.json';
+const utdanningURL   = 'http://wildboy.uib.no/~tpe056/folk/104857.json';
 
 const jsonURLs = [befolkningURL, sysselsatteURL, utdanningURL];
 
-/*
-*
+/**
+*   Requests a JSON file from a ID
+*   @param jsonID - [Integer] ID between 0 - jsonURLs.lenght
 */
 let getJSONByID = function(jsonID) {
     if (jsonID < jsonURLs.length && jsonID >= 0) {
@@ -17,6 +18,10 @@ let getJSONByID = function(jsonID) {
     }
 };
 
+/**
+*   Requests a JSON file from a string name
+*   @param jsonName - [String] Name
+*/
 let getJSONByName = function(jsonName) {
     jsonName = jsonName.toLowerCase();
     if (jsonName === "befolkning") {
@@ -30,7 +35,11 @@ let getJSONByName = function(jsonName) {
     }
 };
 
-
+/**
+*   Requests a JSON file from a url
+*   @param url - [String] an absolute URL giving the base location of the JSON file
+*   @param response - [String] an absolute URL giving the base location of the JSON file
+*/
 let requestJSON = function (url, response) {
     let request = new XMLHttpRequest();
     request.open('GET', url, true);
@@ -47,12 +56,16 @@ let requestJSON = function (url, response) {
     request.send();
 };
 
+/**
+ *   Requests a JSON file from a url
+ *   @param url - [String] an absolute URL giving the base location of the JSON file
+ */
 let getJSON = function(url) {
     return requestJSON(url, function(err, data) {
         if (err !== null) {
             console.error('Error: Something went wrong: ' + err);
         } else {
-            console.info('Info: Your query count: ' + data.query.count);
+            console.info('Info: DataObject: ' + data);
         }
     });
 };
